@@ -68,8 +68,16 @@ This how, we can use `two csvs` to generate images for a list of characters, ani
 
 #### Run:
 
+for webui:
+
 ```
 python scraper.py generate_images_from_two_csv --input_csv "input/animals.csv" --prompt_csv "input/animals_prompts.csv" --headless False --output_dir "output/animals"
+```
+
+for api:
+
+```
+python scraper.py generate_images_from_two_csv --input_csv "input/animals.csv" --prompt_csv "input/animals_prompts.csv" --use api --output_dir "output/animals"
 ```
 
 ### Parameters
@@ -106,10 +114,17 @@ This how, we can use `two csvs` to generate images for a list of characters, ani
 
 #### Run:
 
+for webui:
+
 ```
 python scraper.py generate_images_from_single_csv --prompt_csv "input/famous_structures.csv" --headless False --output_dir "output/famous_structures"
 ```
 
+for api:
+
+```
+python scraper.py generate_images_from_single_csv --prompt_csv "input/famous_structures.csv" --use api --output_dir "output/famous_structures"
+```
 
 
 ### Parameters
