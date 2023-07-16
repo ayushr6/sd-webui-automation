@@ -31,14 +31,13 @@ from configs.configs import (
     DEFAULT_USE,
     PROGRESS_BAR_XPATH,
     IMAGES_XPATH,
-
     SleepDuration,
 )
 
 from helpers.helpers import Helper
 
-class Scraper:
 
+class Scraper:
     def _init_browser(self, headless=False):
         options = Options()
         if headless:
@@ -49,7 +48,6 @@ class Scraper:
             ChromeDriverManager().install(), options=options
         )
 
-        
         self.helper = Helper(self.browser)
 
     def _init_xpaths(self):
@@ -59,7 +57,7 @@ class Scraper:
         self.cfg_scale = self.helper._get_element(CFG_SCALE_XPATH)
         self.generate_button = self.helper._get_element(GENERATE_BUTTON_XPATH)
         return True
-    
+
     def _generate_using_api(
         self,
         webui_url,
@@ -103,7 +101,6 @@ class Scraper:
                 pnginfo=pnginfo,
             )
 
-
     def _generate_using_webui(
         self,
         prompt,
@@ -137,7 +134,7 @@ class Scraper:
         while True:
             try:
                 progress_bar = self.helper._get_element(PROGRESS_BAR_XPATH)
-            except Exception as e:      # TODO: can become an edge case
+            except Exception as e:  # TODO: can become an edge case
                 break
         images = self.helper._get_elements(IMAGES_XPATH)
         alread_exists = len(os.listdir(output_loc))
@@ -147,7 +144,106 @@ class Scraper:
             urllib.request.urlretrieve(image_src, save_loc)
         return [image.get_attribute("src") for image in images]
 
-    def main(
+    def _check_mode(self, model, webui_url, use, headless):
+        avail_models = Helper.get_available_models(webui_url)
+        if not model in avail_models:
+            print(f"Model {model} not download/available!!")
+
+        if use == "webui":
+            self._init_browser(headless)
+            self.browser.get(webui_url)
+            sleep(SleepDuration.TWO.value)
+            self._init_xpaths()
+
+    def _generate_images(
+        self,
+        prompt,
+        webui_url,
+        model,
+        sampling_method,
+        sampling_steps,
+        batch_count,
+        cfg_scale,
+        use,
+        output_loc,
+    ):
+        os.makedirs(output_loc, exist_ok=True)
+
+        if use == "webui":
+            self._generate_using_webui(
+                prompt,
+                model,
+                sampling_method,
+                sampling_steps,
+                batch_count,
+                cfg_scale,
+                output_loc,
+            )
+        elif use == "api":
+            self._generate_using_api(
+                webui_url,
+                prompt,
+                model,
+                sampling_method,
+                sampling_steps,
+                batch_count,
+                cfg_scale,
+                output_loc,
+            )
+        else:
+            print("Invalid 'use' type!!")
+            return
+
+    def generate_images_from_single_csv(
+        self,
+        prompt_csv=DEFAULT_PROMPT_CSV_PATH,
+        webui_url=DEFAULT_WEBUI_IP,
+        model=DEFAULT_MODEL,
+        output_dir=DEFAULT_OUTPUT_DIR_PATH,
+        sampling_method=DEFAUT_SAMPLING_METHOD,
+        sampling_steps=DEFAULT_SAMPLING_STEPS,
+        batch_count=DEFAULT_BATCH_COUNT,
+        cfg_scale=DEFAULT_CFG_SCALE,
+        use=DEFAULT_USE,
+        headless=True,
+        add_on=False,  # whether to add more images for a prompt, if already exists)
+    ):
+        self._check_mode(model, webui_url, use, headless)
+
+        prompt_df = pd.read_csv(prompt_csv)
+
+        for i, prompt_row in prompt_df.iterrows():
+            x = len(os.listdir(output_dir))
+            output_loc = os.path.join(output_dir, str(x), f"style_{str(i+1)}")
+
+            if not add_on and os.path.exists(output_loc):
+                continue
+
+            prompt = prompt_row["prompt"]
+            if prompt_row["model_name"] is not None:
+                model = prompt_row["model_name"]
+            if prompt_row["sampling_method"] is not None:
+                sampling_method = prompt_row["sampling_method"]
+            if prompt_row["sampling_steps"] is not None:
+                sampling_steps = prompt_row["sampling_steps"]
+            if prompt_row["batch_count"] is not None:
+                batch_count = prompt_row["batch_count"]
+            if prompt_row["cfg_scale"] is not None:
+                cfg_scale = prompt_row["cfg_scale"]
+
+            self._generate_images(
+                prompt,
+                webui_url,
+                model,
+                sampling_method,
+                sampling_steps,
+                batch_count,
+                cfg_scale,
+                use,
+                output_loc,
+            )
+
+    def generate_images_from_two_csv(
         self,
         input_csv=DEFAULT_INPUT_CSV_PATH,
         prompt_csv=DEFAULT_PROMPT_CSV_PATH,
@@ -162,15 +258,7 @@ class Scraper:
         headless=True,
         add_on=False,  # whether to add more images for a prompt, if already exists
     ):
-        avail_models = Helper.get_available_models(webui_url)
-        if not model in avail_models:
-            print(f"Model {model} not download/available!!")
-
-        if use == "webui":
-            self._init_browser(headless)
-            self.browser.get(webui_url)
-            sleep(SleepDuration.TWO.value)
-            self._init_xpaths()
+        self._check_mode(model, webui_url, use, headless)
 
         input_df = pd.read_csv(input_csv)
         prompt_df = pd.read_csv(prompt_csv)
@@ -197,32 +285,19 @@ class Scraper:
                     cfg_scale = prompt_row["cfg_scale"]
 
                 output_loc = os.path.join(output_dir, x, f"style_{str(j+1)}")
-                os.makedirs(output_loc, exist_ok=True)
 
-                if use == "webui":
-                    self._generate_using_webui(
-                        prompt,
-                        model,
-                        sampling_method,
-                        sampling_steps,
-                        batch_count,
-                        cfg_scale,
-                        output_loc,
-                    )
-                elif use == "api":
-                    self._generate_using_api(
-                        webui_url,
-                        prompt,
-                        model,
-                        sampling_method,
-                        sampling_steps,
-                        batch_count,
-                        cfg_scale,
-                        output_loc,
-                    )
-                else:
-                    print("Invalid 'use' type!!")
-                    return
+                self._generate_images(
+                    prompt,
+                    webui_url,
+                    model,
+                    sampling_method,
+                    sampling_steps,
+                    batch_count,
+                    cfg_scale,
+                    use,
+                    output_loc,
+                )
+
 
 if __name__ == "__main__":
     fire.Fire(Scraper)
