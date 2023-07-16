@@ -28,8 +28,9 @@ Note 2: After successfully running the webui, note down the `URL` at which the w
 
     Running on local URL:  http://127.0.0.1:7860
 
+ #### Important: Do not close or exit the terminal, using which sd-webui is running
 
-## Step 3 - Clone this repo
+## Step 3 - Clone this repo (in another terminal)
 
 - for HTTPS:
 ```
