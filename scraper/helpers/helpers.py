@@ -2,7 +2,7 @@ import fire
 from time import sleep
 import requests
 
-from configs import (
+from configs.configs import (
     SD_CKP_DROPDOWN_XPATH,
     SD_CKP_LIST_XPATH,
     SD_CKP_PROGRESS_BAR_XPATH,

@@ -1,17 +1,19 @@
-import fire
 import os
 from time import sleep
-import urllib
+import fire
 import pandas as pd
-
 from tqdm import tqdm
+import requests
+import urllib.request
+import io
+import base64
+from PIL import Image, PngImagePlugin
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
 
-from configs import (
+from configs.configs import (
     PROMPT_TEXTBOX_XPATH,
     SAMPLING_STEPS_XPATH,
     BATCH_COUNT_XPATH,
@@ -33,8 +35,7 @@ from configs import (
     SleepDuration,
 )
 
-from helper import Helper
-
+from helpers.helpers import Helper
 
 class Scraper:
 
@@ -59,6 +60,50 @@ class Scraper:
         self.generate_button = self.helper._get_element(GENERATE_BUTTON_XPATH)
         return True
     
+    def _generate_using_api(
+        self,
+        webui_url,
+        prompt,
+        model,
+        sampling_method,
+        sampling_steps,
+        batch_count,
+        cfg_scale,
+        output_loc,
+    ):
+        payload = {
+            "prompt": prompt,
+            "steps": sampling_steps,
+            "batch_size": batch_count,
+            "cfg_scale": cfg_scale,
+            "sampler_index": sampling_method,
+        }
+
+        opt = requests.get(url=f"{webui_url}/sdapi/v1/options")
+        opt_json = opt.json()
+        opt_json["sd_model_checkpoint"] = f"{model}"
+        requests.post(url=f"{webui_url}/sdapi/v1/options", json=opt_json)
+
+        response = requests.post(url=f"{webui_url}/sdapi/v1/txt2img", json=payload)
+
+        r = response.json()
+        alread_exists = len(os.listdir(output_loc))
+        for i, img in enumerate(r["images"]):
+            image = Image.open(io.BytesIO(base64.b64decode(img.split(",", 1)[0])))
+
+            png_payload = {"image": "data:image/png;base64," + img}
+            response2 = requests.post(
+                url=f"{webui_url}/sdapi/v1/png-info", json=png_payload
+            )
+
+            pnginfo = PngImagePlugin.PngInfo()
+            pnginfo.add_text("parameters", response2.json().get("info"))
+            image.save(
+                os.path.join(output_loc, str(alread_exists + i + 1) + ".png"),
+                pnginfo=pnginfo,
+            )
+
+
     def _generate_using_webui(
         self,
         prompt,
