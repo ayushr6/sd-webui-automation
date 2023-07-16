@@ -1,0 +1,7 @@
+fire==0.5.0
+pandas==1.5.3
+Pillow==9.5.0
+Requests==2.31.0
+selenium==4.10.0
+tqdm==4.65.0
+webdriver_manager==3.8.5
