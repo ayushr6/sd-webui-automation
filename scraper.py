@@ -138,6 +138,8 @@ class Scraper:
             except Exception as e:  # TODO: can become an edge case
                 break
         images = self.helper._get_elements(IMAGES_XPATH)
+        if len(images)>1:
+            images = images[1:]
         alread_exists = len(os.listdir(output_loc))
         for i, image in enumerate(images):
             image_src = image.get_attribute("src")
