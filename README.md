@@ -18,7 +18,13 @@
 
 Follow the setps provided in the [README](https://github.com/AUTOMATIC1111/stable-diffusion-webui/blob/master/README.md) to install and run `AUTOMATIC1111 - stable diffusion webui`
 
-Note: After successfully running the webui, note down the `URL` at which the webui is running. For e.g.
+Note 1: After successfull installation, run the webui with the `api` flag, as follows:- 
+
+```
+    bash webui.sh --api
+```
+
+Note 2: After successfully running the webui, note down the `URL` at which the webui is running. For e.g.
 
     Running on local URL:  http://127.0.0.1:7860
 
