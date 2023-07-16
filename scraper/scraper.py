@@ -88,10 +88,11 @@ class Scraper:
         self.cfg_scale.clear()
         self.cfg_scale.send_keys(cfg_scale)
         self.generate_button.click()
+        sleep(SleepDuration.ONE.value)
         while True:
             try:
-                progress_bar = self.helper._get_element(PROGRESS_BAR_XPATH, self.browser)
-            except Exception as e:
+                progress_bar = self.helper._get_element(PROGRESS_BAR_XPATH)
+            except Exception as e:      # TODO: can become an edge case
                 break
         images = self.helper._get_elements(IMAGES_XPATH)
         alread_exists = len(os.listdir(output_loc))

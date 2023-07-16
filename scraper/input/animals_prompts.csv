@@ -1,2 +1,2 @@
 prompt,replace_with,model_name,sampling_method,sampling_steps,cfg_scale,batch_count
-"tiny cute ____ toy, soft smooth lighting, soft pastel colors, 3d blender render, polycount, modular constructivism, pop surrealism, physically based rendering, square image, ",____,deliberate_v2,18,25,13,8
+"tiny cute ____ toy, soft smooth lighting, soft pastel colors, 3d blender render, polycount, modular constructivism, pop surrealism, physically based rendering, square image, ",____,deliberate_v2,DDIM,25,13,8

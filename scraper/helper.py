@@ -17,7 +17,6 @@ from selenium.webdriver.common.by import By
 class Helper:
 
     def __init__(self, browser):
-        print(browser, '*'*10)
         self.browser = browser
 
     def get_available_models(url):
@@ -64,7 +63,6 @@ class Helper:
 
     def _get_element(self, xpath):
         sleep(SleepDuration.ONE.value)
-        print(self.browser, '*'*10)
         return self.browser.find_element(By.XPATH, xpath)
 
     def _get_elements(self, xpath):
