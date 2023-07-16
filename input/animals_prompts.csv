@@ -1,0 +1,3 @@
+prompt,replace_with,model_name,sampling_method,sampling_steps,cfg_scale,batch_count
+"tiny cute ____ toy, soft smooth lighting, soft pastel colors, 3d blender render, polycount, modular constructivism, pop surrealism, physically based rendering, square image, ",____,deliberate_v2,DDIM,25,13,8
+"kawaii Squishy ____ plush toy, realistic texture, visible stitch line, soft smooth lighting, vibrant studio lighting, modular constructivism, physically based rendering, square image ",____,sd-v1-4,DDIM,35,13,8

@@ -2,7 +2,7 @@ import fire
 from time import sleep
 import requests
 
-from configs import (
+from configs.configs import (
     SD_CKP_DROPDOWN_XPATH,
     SD_CKP_LIST_XPATH,
     SD_CKP_PROGRESS_BAR_XPATH,
@@ -17,10 +17,9 @@ from selenium.webdriver.common.by import By
 class Helper:
 
     def __init__(self, browser):
-        print(browser, '*'*10)
         self.browser = browser
 
-    def get_available_models(url):
+    def _get_available_models(url):
         response = requests.get(f'{url}/sdapi/v1/sd-models')
         if response.status_code == 200:
             models_data = response.json()
@@ -64,7 +63,6 @@ class Helper:
 
     def _get_element(self, xpath):
         sleep(SleepDuration.ONE.value)
-        print(self.browser, '*'*10)
         return self.browser.find_element(By.XPATH, xpath)
 
     def _get_elements(self, xpath):
