@@ -1,0 +1,26 @@
+prompt,model_name,sampling_method,sampling_steps,cfg_scale,batch_count
+"""Pixar-style 3D animation of the Eiffel Tower in Paris, capturing its iconic lattice structure, detailed, vibrant colors, high-resolution, digital Pixar art.""",deliberate_v2,DDIM,25,13,8
+"""3D Pixar-style image of the Great Wall of China, snaking across mountains, high detail, vibrant colors, computer-generated model.""",deliberate_v2,DDIM,25,13,8
+"""High-resolution, Pixar-style 3D animation of the Statue of Liberty, capturing its iconic torch and crown, detailed character design, digital Pixar render.""",eddiemauroLora2 (Elegant),DDIM,25,13,8
+"""Pixar-style 3D model of the Colosseum in Rome, showcasing its historic arches, detailed and vibrant, high-quality digital art.""",deliberate_v2,DDIM,25,13,8
+"""3D Pixar-style image of the Pyramids of Giza, capturing their majestic scale and geometric shapes, detailed, vibrant colors, digital Pixar animation.""",eddiemauroLora2 (Elegant),DDIM,25,13,8
+"""Pixar-style 3D animation of the Taj Mahal in India, capturing its detailed marble design and reflecting pool, high-resolution, digital Pixar art.""",deliberate_v2,DDIM,25,13,8
+"""3D Pixar-style image of the Leaning Tower of Pisa, showcasing its famous tilt, highly detailed, vibrant colors, computer-generated model.""",sd-v1-4,DDIM,25,13,8
+"""Pixar-style 3D model of the Sydney Opera House, capturing its iconic shell-like design, detailed and vibrant, high-quality digital art.""",deliberate_v2,DDIM,25,13,8
+"""3D Pixar-style image of Stonehenge, capturing its mysterious stones in a field, detailed, vibrant colors, digital Pixar animation.""",sd-v1-4,DDIM,25,13,8
+"""Pixar-style 3D animation of Machu Picchu, showcasing the historic city nestled in the mountains, high-resolution, detailed character design, digital Pixar render.""",absolutereality_v1,DDIM,25,13,8
+"""3D Pixar-style image of the Golden Gate Bridge in San Francisco, capturing its iconic red color and suspension design, high detail, vibrant colors, computer-generated model.""",eddiemauroLora2 (Elegant),DDIM,25,13,8
+"""Pixar-style 3D model of the Great Sphinx of Giza, showcasing its mythical creature design, detailed and vibrant, high-quality digital art.""",sd-v1-4,DDIM,25,13,8
+"""3D Pixar-style image of the Christ the Redeemer statue in Rio de Janeiro, showcasing its iconic open-armed stance, detailed, vibrant colors, digital Pixar animation.""",moDi-v1-pruned,DDIM,25,13,8
+"""Pixar-style 3D animation of the Burj Khalifa in Dubai, capturing its staggering height and modern design, high-resolution, detailed character design, digital Pixar render.""",eddiemauroLora2 (Elegant),DDIM,25,13,8
+"""3D Pixar-style image of the Parthenon in Athens, capturing its iconic pillars and ancient design, high detail, vibrant colors, computer-generated model.""",moDi-v1-pruned,DDIM,25,13,8
+"""Pixar-style 3D model of the Empire State Building in New York, showcasing its art deco design, detailed and vibrant, high-quality digital art.""",deliberate_v2,DDIM,25,13,8
+"""3D Pixar-style image of the Chichen Itza pyramid in Mexico, capturing its iconic steps and stone design, detailed, vibrant colors, digital Pixar animation.""",absolutereality_v1,DDIM,25,13,8
+"""Pixar-style 3D animation of the Acropolis in Athens, showcasing the ancient city on a hill, high-resolution, detailed character design, digital Pixar render.""",moDi-v1-pruned,DDIM,25,13,8
+"""3D Pixar-style image of Mount Rushmore, capturing the iconic presidential faces carved into stone, high detail, vibrant colors, computer-generated model.""",deliberate_v2,DDIM,25,13,8
+"""Pixar-style 3D model of the Louvre Museum in Paris, showcasing its modern glass pyramid entrance, detailed and vibrant, high-quality digital art.""",deliberate_v2,DDIM,25,13,8
+"""Pixar-style 3D rendering of the St. Basil's Cathedral in Moscow, capturing its colorful, onion-shaped domes, vibrant colors, detailed digital animation.""",deliberate_v2,DDIM,25,13,8
+"""High-quality Pixar-style 3D image of the Tower Bridge in London, capturing its iconic dual towers and drawbridge, vibrant colors, detailed digital animation.""",absolutereality_v1,DDIM,25,13,8
+"""Pixar-style 3D model of the Big Ben in London, showcasing its iconic clock tower, high detail, vibrant colors, digital Pixar animation.""",deliberate_v2,DDIM,25,13,8
+"""3D Pixar-style illustration of the Golden Temple in Amritsar, displaying its golden dome and peaceful lake, vibrant colors, detailed digital animation.""",moDi-v1-pruned,DDIM,25,13,8
+"""High-quality Pixar-style 3D image of the Sun Temple in Konark, showcasing its intricate carvings and chariot wheel structure, high detail, vibrant colors, digital Pixar render.""",absolutereality_v1,DDIM,25,13,8

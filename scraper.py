@@ -21,7 +21,8 @@ from configs.configs import (
     GENERATE_BUTTON_XPATH,
     DEFAULT_INPUT_CSV_PATH,
     DEFAULT_PROMPT_CSV_PATH,
-    DEFAULT_WEBUI_IP,
+    DEFAULT_SINGLE_CSV_PATH,
+    DEFAULT_WEBUI_URL,
     DEFAULT_MODEL,
     DEFAULT_OUTPUT_DIR_PATH,
     DEFAUT_SAMPLING_METHOD,
@@ -145,7 +146,7 @@ class Scraper:
         return [image.get_attribute("src") for image in images]
 
     def _check_mode(self, model, webui_url, use, headless):
-        avail_models = Helper.get_available_models(webui_url)
+        avail_models = Helper._get_available_models(webui_url)
         if not model in avail_models:
             print(f"Model {model} not download/available!!")
 
@@ -194,10 +195,13 @@ class Scraper:
             print("Invalid 'use' type!!")
             return
 
+    def print_available_models(self,):
+        print(Helper._get_available_models(DEFAULT_WEBUI_URL))
+
     def generate_images_from_single_csv(
         self,
-        prompt_csv=DEFAULT_PROMPT_CSV_PATH,
-        webui_url=DEFAULT_WEBUI_IP,
+        prompt_csv=DEFAULT_SINGLE_CSV_PATH,
+        webui_url=DEFAULT_WEBUI_URL,
         model=DEFAULT_MODEL,
         output_dir=DEFAULT_OUTPUT_DIR_PATH,
         sampling_method=DEFAUT_SAMPLING_METHOD,
@@ -212,9 +216,13 @@ class Scraper:
 
         prompt_df = pd.read_csv(prompt_csv)
 
-        for i, prompt_row in prompt_df.iterrows():
+        os.makedirs(output_dir, exist_ok=True)
+
+        for i, prompt_row in tqdm(
+            prompt_df.iterrows(), total=prompt_df.shape[0], desc="Generating Images"
+        ):
             x = len(os.listdir(output_dir))
-            output_loc = os.path.join(output_dir, str(x), f"style_{str(i+1)}")
+            output_loc = os.path.join(output_dir, str(x))
 
             if not add_on and os.path.exists(output_loc):
                 continue
@@ -247,7 +255,7 @@ class Scraper:
         self,
         input_csv=DEFAULT_INPUT_CSV_PATH,
         prompt_csv=DEFAULT_PROMPT_CSV_PATH,
-        webui_url=DEFAULT_WEBUI_IP,
+        webui_url=DEFAULT_WEBUI_URL,
         model=DEFAULT_MODEL,
         output_dir=DEFAULT_OUTPUT_DIR_PATH,
         sampling_method=DEFAUT_SAMPLING_METHOD,

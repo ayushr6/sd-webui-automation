@@ -2,7 +2,8 @@ from enum import Enum
 
 DEFAULT_INPUT_CSV_PATH = "input/animals.csv"
 DEFAULT_PROMPT_CSV_PATH = "input/animals_prompts.csv"
-DEFAULT_WEBUI_IP = "http://127.0.0.1:7860"
+DEFAULT_SINGLE_CSV_PATH = "input/famous_structures.csv"
+DEFAULT_WEBUI_URL = "http://127.0.0.1:7860"
 DEFAUT_SAMPLING_METHOD = "DDMI"
 DEFAULT_SAMPLING_STEPS = 20
 DEFAULT_BATCH_COUNT = 8

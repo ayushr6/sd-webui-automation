@@ -19,7 +19,7 @@ class Helper:
     def __init__(self, browser):
         self.browser = browser
 
-    def get_available_models(url):
+    def _get_available_models(url):
         response = requests.get(f'{url}/sdapi/v1/sd-models')
         if response.status_code == 200:
             models_data = response.json()
