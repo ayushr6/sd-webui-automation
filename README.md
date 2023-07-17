@@ -54,6 +54,12 @@ run:
 
 ## Step 5 - Setup and Running Script
 
+#### To list all available models on you end, run the following command:
+
+```
+    python generate_images.py print_available_models
+```
+
 ### There are two ways through which you can generate images:
 
 #### 1. using `two csv` files:
@@ -80,13 +86,13 @@ This how, we can use `two csvs` to generate images for a list of characters, ani
 for webui:
 
 ```
-python scraper.py generate_images_from_two_csv --input_csv "input/animals.csv" --prompt_csv "input/animals_prompts.csv" --headless False --output_dir "output/animals"
+python generate_images.py generate_images_from_two_csv --input_csv "input/animals.csv" --prompt_csv "input/animals_prompts.csv" --headless False --output_dir "output/animals"
 ```
 
 for api:
 
 ```
-python scraper.py generate_images_from_two_csv --input_csv "input/animals.csv" --prompt_csv "input/animals_prompts.csv" --use api --output_dir "output/animals"
+python generate_images.py generate_images_from_two_csv --input_csv "input/animals.csv" --prompt_csv "input/animals_prompts.csv" --use api --output_dir "output/animals"
 ```
 
 ### Parameters
@@ -126,13 +132,13 @@ This how, we can use `two csvs` to generate images for a list of characters, ani
 for webui:
 
 ```
-python scraper.py generate_images_from_single_csv --prompt_csv "input/famous_structures.csv" --headless False --output_dir "output/famous_structures"
+python generate_images.py generate_images_from_single_csv --prompt_csv "input/famous_structures.csv" --headless False --output_dir "output/famous_structures"
 ```
 
 for api:
 
 ```
-python scraper.py generate_images_from_single_csv --prompt_csv "input/famous_structures.csv" --use api --output_dir "output/famous_structures"
+python generate_images.py generate_images_from_single_csv --prompt_csv "input/famous_structures.csv" --use api --output_dir "output/famous_structures"
 ```
 
 
