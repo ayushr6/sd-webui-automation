@@ -1,5 +1,7 @@
 
-# automatic1111-automation
+# Automatic1111-webui Automation
+
+A python automation script to automate the sd-webui, so to ease the task to generate thousands of images, in one go, with the help of `csv`.
 
 ## Step 1 - Clone:
 
